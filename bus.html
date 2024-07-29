@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .container {
+            margin: 20px;
+        }
+        .output {
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+        }
+        button {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bus Management System</h1>
+        <div class="output" id="output">Welcome! Please select an option.</div>
+        <button onclick="showPerson()">Show Person</button>
+        <button onclick="addPerson()">Add Person</button>
+        <button onclick="removePerson()">Remove Person</button>
+        <button onclick="exit()">Exit</button>
+    </div>
+    
+    <script>
+        let person = 0;
+
+        function showPerson() {
+            const ticket = 12 * person;
+            document.getElementById('output').innerHTML = `
+                <div>*********************</div>
+                <div>Number of person is ${person}</div>
+                <div>Amount collected is ${ticket} $</div>
+                <div>*********************</div>
+            `;
+        }
+
+        function addPerson() {
+            const nPerson = parseInt(prompt('Enter number of person to be added:'), 10);
+            if (isNaN(nPerson) || nPerson < 0) {
+                alert('Enter a positive number');
+            } else {
+                person += nPerson;
+                showPerson();
+            }
+        }
+
+        function removePerson() {
+            const nPerson = parseInt(prompt('Enter number of person to be removed:'), 10);
+            if (isNaN(nPerson) || nPerson < 0) {
+                alert('Number of person must be greater than 0');
+            } else if (nPerson > person) {
+                alert('Number of person to be removed should be less than or equal to current person');
+            } else {
+                person -= nPerson;
+                showPerson();
+            }
+        }
+
+        function exit() {
+            document.getElementById('output').innerHTML = `
+                <div>*********************</div>
+                <div>Thank You! Have a nice day!</div>
+                <div>*********************</div>
+            `;
+            setTimeout(() => window.close(), 2000); // Attempt to close the window after 2 seconds
+        }
+    </script>
+</body>
+</html>
